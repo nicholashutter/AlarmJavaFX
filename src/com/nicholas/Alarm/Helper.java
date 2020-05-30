@@ -22,7 +22,8 @@ public class Helper extends TimerTask
     {
         //THIS CODE WAS CHANGED
         int hr = alarmTime.getHour();       // no need to continually call this method.  We will just get it once.
-        int min = alarmTime.getMinute();    // same here
+        int min = alarmTime.getMinute();
+        int second = alarmTime.getSecond();// same here
 
         localTime = LocalTime.now();        // we need to update the localtime variable each cycle
 
