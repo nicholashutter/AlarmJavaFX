@@ -1,0 +1,24 @@
+
+
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.*?>
+
+
+
+<GridPane fx:controller="com.nicholas.Alarm.Controller"
+          xmlns:fx="http://javafx.com/fxml" alignment="top_left" hgap="10" vgap="10" prefHeight="-Infinity" prefWidth="-Infinity">
+    <style>
+        -fx-padding: 10;
+        -fx-border-style: solid inside;
+        -fx-border-width: .5;
+        -fx-border-insets: 5;
+        -fx-border-radius: 5;
+        -fx-border-color: black;
+    </style>
+    <Button fx:id="stopButton" text = "Stop Alarm" onAction="#stopAlarm" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="1" prefWidth="350" prefHeight="25" alignment="CENTER"/>
+    <Label fx:id="currentAlarm" GridPane.rowIndex="0" GridPane.columnIndex="0" prefWidth="350" />
+    <Label fx:id="newAlarmMessage" text="Enter New Alarm Value in Military Format (Ex: '7:00' for 7 a.m.). : " GridPane.rowIndex="2" GridPane.columnIndex="0" prefWidth="350" />
+    <TextField fx:id="enterNewAlarm" GridPane.rowIndex="3" GridPane.columnIndex="0" prefWidth="350" alignment="center" onKeyPressed="#setAlarm"/>
+</GridPane>
