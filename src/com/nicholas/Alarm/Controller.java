@@ -78,23 +78,35 @@ public class Controller
         {
 
             String rawUserInput =enterNewAlarm.getText();
-            String userInput = rawUserInput.replace(":","");
+
+            String[] timeInput = rawUserInput.split(":");        // split your string into an array
+
+            //String userInput = rawUserInput.replace(":","");  // split eliminates need for this
 
 
             int success = 0;
 
             try
             {
-                if (userInput.length() == 3)
+                if(timeInput.length == 2) //if (userInput.length() == 3)
                 {
-                    alarmTime.setAlarm(Integer.parseInt(userInput.substring(0,1)),Integer.parseInt(userInput.substring(1,2)),Integer.parseInt(userInput.substring(2,3)));
+                    //alarmTime.setAlarm(Integer.parseInt(userInput.substring(0,1)),Integer.parseInt(userInput.substring(1,2)),Integer.parseInt(userInput.substring(2,3)));
+                    alarmTime.setAlarm(Integer.parseInt(timeInput[0],10), Integer.parseInt(timeInput[1],10), 0);  // just send zero seconds.
+
+                    Helper helper = new Helper(alarmTime);  // Create your task
+                    Timer timer = new Timer();              // Create a timer object
+                    timer.schedule(helper, 0, 500);         // Schedule your task to run every 500ms
+
+                    
+                    //helper.run();
+
                     success = 1;
                 }
-                else if (userInput.length() == 4)
+                /*else if (userInput.length() == 4)
                 {
                     alarmTime.setAlarm(Integer.parseInt(userInput.substring(0,2)),Integer.parseInt(userInput.substring(2,3)),Integer.parseInt(userInput.substring(3,4)));
                     success = 1;
-                }
+                }*/
                 else
                 {
                     this.currentAlarm.setText("Invalid Character Length. Try Again.");
@@ -112,5 +124,4 @@ public class Controller
             }
         }
     }
-
 }
