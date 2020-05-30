@@ -17,20 +17,18 @@ public class AlarmTime
 
     }
 
-    public void setAlarm(int x,int y,int z)
+    public void setAlarm(int hour,int minute,int second)
     {
 
-        x = hour;
+        this.hour = hour;
+        this.minute = minute;
+        this.second = second;
 
-        y = minute;
+        calendar.set(Calendar.HOUR_OF_DAY,hour);
 
-        z = second;
+        calendar.set(Calendar.MINUTE,minute);
 
-        calendar.set(Calendar.HOUR_OF_DAY,x);
-
-        calendar.set(Calendar.MINUTE,y);
-
-        calendar.set(Calendar.SECOND,z);
+        calendar.set(Calendar.SECOND,second);
     }
 
     public int getHour()

@@ -22,6 +22,7 @@ public class Helper extends TimerTask
 
         {
             aw.start();
+            Controller.alarmSounding=1;
         }
 
     }
@@ -30,4 +31,5 @@ public class Helper extends TimerTask
     {
         aw.stop();
     }
+
 }
