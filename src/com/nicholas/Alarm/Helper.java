@@ -7,9 +7,11 @@ public class Helper extends TimerTask
 {
     LocalTime localTime = LocalTime.now();
 
-    AePlayWave aw = new AePlayWave("alarm.wav");
+    AePlayWave aw = new AePlayWave("alarm.wav");    // renamed the wav file and placed in top most directory so it can be found properly
 
     AlarmTime alarmTime;
+
+    Boolean interrupt = false;              // interrupt can be altered by UI to stop
 
     public Helper(AlarmTime alarmTime)
     {
@@ -18,13 +20,22 @@ public class Helper extends TimerTask
 
     public void run()
     {
-        if (localTime.getHour()== alarmTime.getHour() & localTime.getMinute()==alarmTime.getMinute() & localTime.getSecond() == alarmTime.getSecond())
+        //THIS CODE WAS CHANGED
+        int hr = alarmTime.getHour();       // no need to continually call this method.  We will just get it once.
+        int min = alarmTime.getMinute();    // same here
 
+        localTime = LocalTime.now();        // we need to update the localtime variable each cycle
+
+        if ((localTime.getHour()== hr && localTime.getMinute()== min && localTime.getSecond() == 0) && interrupt == false)  
         {
-            aw.start();
-            Controller.alarmSounding=1;
+            if (!aw.isAlive())              // make sure the aw thread isnt already playing the audio
+            {
+                aw.start();
+                Controller.alarmSounding=1;
+            }
+            
         }
-
+        //END OF CHANGE
     }
 
     public void stop()
