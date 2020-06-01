@@ -11,37 +11,41 @@ public class Helper extends TimerTask
 
     AlarmTime alarmTime;
 
-    Boolean interrupt = false;              // interrupt can be altered by UI to stop
+    Boolean interrupt = false;
 
-    public Helper(AlarmTime alarmTime)
+    Controller controller = null;// interrupt can be altered by UI to stop
+
+    public Helper(AlarmTime alarmTime,Controller controller)
     {
         this.alarmTime=alarmTime;
+        this.controller = controller;
     }
 
     public void run()
     {
-        //THIS CODE WAS CHANGED
-        int hr = alarmTime.getHour();       // no need to continually call this method.  We will just get it once.
-        int min = alarmTime.getMinute();
-        int second = alarmTime.getSecond();// same here
 
-        localTime = LocalTime.now();        // we need to update the localtime variable each cycle
+        int hr = alarmTime.getHour();
+        int min = alarmTime.getMinute();
+        int second = alarmTime.getSecond();
+
+        localTime = LocalTime.now();
 
         if ((localTime.getHour()== hr && localTime.getMinute()== min && localTime.getSecond() == 0) && interrupt == false)  
         {
-            if (!aw.isAlive())              // make sure the aw thread isnt already playing the audio
+            if (!aw.isAlive())
             {
                 aw.start();
-                Controller.alarmSounding=1;
+                controller.stateAlarmSounding();
+
             }
             
         }
-        //END OF CHANGE
     }
 
     public void stop()
     {
         aw.stop();
+        controller.stateDefault();
     }
 
 }

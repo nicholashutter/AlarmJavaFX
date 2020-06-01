@@ -29,6 +29,8 @@ public class AlarmTime
         calendar.set(Calendar.MINUTE,minute);
 
         calendar.set(Calendar.SECOND,second);
+
+
     }
 
     public int getHour()
